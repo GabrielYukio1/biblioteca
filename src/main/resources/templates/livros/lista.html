@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Livros</title>
+</head>
+<body>
+
+<h1>Livros Cadastrados</h1>
+
+<a th:href="@{/livros/novo}">Cadastrar novo livro</a>
+
+<br><br>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Título</th>
+        <th>Autor</th>
+        <th>Ano de publicação</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="livro : ${livros}">
+        <td th:text="${livro.id}"></td>
+        <td th:text="${livro.titulo}"></td>
+        <td th:text="${livro.autor}"></td>
+        <td th:text="${livro.anoPublicacao}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<p th:if="${#lists.isEmpty(livros)}">
+    Nenhum livro cadastrado.
+</p>
+
+</body>
+</html>
