@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -32,6 +33,14 @@ public class LivroController {
     @PostMapping("/livros")
     public String salvar(@ModelAttribute Livro livro) {
         livroRepository.save(livro);
+        return "redirect:/livros";
+    }
+
+    @GetMapping("/livros/excluir/{id}")
+    public String excluir(@PathVariable Long id) {
+        if (livroRepository.existsById(id)) {
+            livroRepository.deleteById(id);
+        }
         return "redirect:/livros";
     }
 }
